@@ -15,13 +15,13 @@ if response.status_code == 200:
     # Parse the JSON response
     repos = response.json()
     print(f"Fetched {len(repos)} repositories for user '{username}'")
+    # prepare table
+    table = []
+    # Loop through the repositories and print details
+    for repo in repos:
+        table.append([repo['name'],repo['stargazers_count'], repo['description']])
+    headers = ['Repository Name', 'Stars','Description']
+    print(tabulate(table, headers=headers, tablefmt='grid'))
 else:
     # Handle errors (e.g., user not found or rate limit exceeded)
     print(f"Failed to fetch repositories. Status code: {response.status_code}")
-
-# Loop through the repositories and print details
-for repo in repos:
-    print(f"Name: {repo['name']}")
-    print(f"Description: {repo['description']}")
-    print(f"Stars: {repo['stargazers_count']}")
-    print("-" * 40)
