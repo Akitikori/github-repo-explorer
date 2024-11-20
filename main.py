@@ -1,4 +1,5 @@
 import requests
+from tabulate import tabulate
 
 # Ask the user for their username
 username = input("Enter the GitHub username: ")
